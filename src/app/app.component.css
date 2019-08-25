@@ -1,3 +1,6 @@
 #sticky-footer {
     flex-shrink: none;
   }
+  .navbar-light .navbar-nav .nav-link {
+    color: rgb(255, 255, 255);
+}
