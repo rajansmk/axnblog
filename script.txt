@@ -1,0 +1,55 @@
+CREATE TABLE `blog_category` (
+  `catid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`catid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_role` (
+  `roleid` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(60) NOT NULL,
+  PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `blog_group` (
+  `groupid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`groupid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `blog_user` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `mobile` varchar(100) NOT NULL,
+  `roleid` int(11) NOT NULL,
+  PRIMARY KEY (`userid`),
+  KEY `fk_role_id` (`roleid`),
+  CONSTRAINT `fk_role_id` FOREIGN KEY (`roleid`) REFERENCES `user_role` (`roleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `blog_details` (
+  `blogid` int(11) NOT NULL AUTO_INCREMENT,
+   `blog_desc` text,
+   `blog_header` varchar(60) NOT NULL,
+   `blog_headerdesc` varchar(200) NOT NULL,
+   `blog_keywords` varchar(60) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `catid` int(11) NOT NULL,
+  `groupid` int(11) NOT NULL,
+  PRIMARY KEY (`blogid`),
+  KEY `fk_group_id` (`groupid`),
+  CONSTRAINT `fk_group_id` FOREIGN KEY (`groupid`) REFERENCES `blog_group` (`groupid`),
+  KEY `fk_cat_id` (`catid`),
+  CONSTRAINT `fk_cat_id` FOREIGN KEY (`catid`) REFERENCES `blog_category` (`catid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
