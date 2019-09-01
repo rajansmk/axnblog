@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { BlogComponent } from './blog/blog.component';
+import { SafehtmlPipe } from './safehtml.pipe';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { BlogComponent } from './blog/blog.component';
     AppComponent,
     HomeComponent,
     JwPaginationComponent,
-    BlogComponent
+    BlogComponent,
+    SafehtmlPipe
   ],
   imports: [
     BrowserModule,

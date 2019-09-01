@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Blog} from '../../blog';
+import {Bloghome} from '../../classall/bloghome';
 import { DataserviceService } from '../../dataservice.service'
 import{Meta,Title} from "@angular/platform-browser";
 
@@ -10,7 +11,7 @@ import{Meta,Title} from "@angular/platform-browser";
 })
 export class HomeComponent implements OnInit  {
 
-  items = new Array<Blog>();
+  items = new Array<Bloghome>();
   pageOfItems: Array<any>;
 
   constructor(private dataService: DataserviceService,meta: Meta, title: Title) { 
@@ -36,20 +37,16 @@ export class HomeComponent implements OnInit  {
     // this.meta.updateTag({ property: 'og:url', content: `https://instafire-app.firebaseapp.com/${config.slug}` });
     
 
-    dataService.getEmployees().subscribe(response =>
+    dataService.getBlog().subscribe(response =>
       {
         this.items = response.map(item =>
         {
-          return new Blog(
+          return new Bloghome(
             item.blogid,
-            item.blog_desc,
               item.blog_header,
               item.blog_headerdesc,
-              
               item.blog_keywords,
-              item.created_date,
-              item.groupid,
-              item.catid,
+              item.name,
               
 
           );
