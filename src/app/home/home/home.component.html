@@ -3,7 +3,8 @@
           
 		<div class="card-body" *ngFor="let blog of pageOfItems">
 		  <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
-		  <a class="card-link" [routerLink]="['/blog', blog.name,blog.blogid, blog.blog_keywords]" >
+		  <!-- <a class="card-link" [routerLink]="['/blog', blog.name,blog.blogid, blog.blog_keywords]" > -->
+			<a class="card-link" (click)="Mainrouting(blog.blogid,blog.blog_keywords,blog.blog_header,blog.blog_headerdesc)" >
 			  
 			<h5 class="card-title"> {{blog.blog_header}}</h5>
 			
@@ -21,11 +22,11 @@
 			<span class="badge badge-primary">Paython</span>
 		  </div>
 		</div>
-		<div class="card-footer">
+		<!-- <div class="card-footer">
 		  <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
 		  <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
 		  <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-		</div>
+		</div> -->
 	  </div>
 	  <div class="card-footer pb-0 pt-3">
 			<jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>

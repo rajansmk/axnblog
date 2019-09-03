@@ -3,6 +3,7 @@ import {Blog} from '../../blog';
 import {Bloghome} from '../../classall/bloghome';
 import { DataserviceService } from '../../dataservice.service'
 import{Meta,Title} from "@angular/platform-browser";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +14,15 @@ export class HomeComponent implements OnInit  {
 
   items = new Array<Bloghome>();
   pageOfItems: Array<any>;
+ 
 
-  constructor(private dataService: DataserviceService,meta: Meta, title: Title) { 
-    title.setTitle('My Spiffy Home Page');
+  constructor(private dataService: DataserviceService,meta: Meta, title: Title,private router:Router) { 
+    title.setTitle('Angular 8,asp.net core tutorial');
 
     meta.addTags([
-      { name: 'author',   content: 'Coursetro.com'},
-      { name: 'keywords', content: 'angular seo, angular 4 universal, etc'},
-      { name: 'description', content: 'This is my Angular SEO-based App, enjoy it!' }
+      { name: 'author',   content: 'axn1.com'},
+      { name: 'keywords', content: 'angular8 tutorial, asp.net web api,asp.net core,asp.net core web api'},
+      { name: 'description', content: 'Tutorial of asp.net core and angular tutorial' }
     ]);
 
     // this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
@@ -62,6 +64,16 @@ export class HomeComponent implements OnInit  {
 onChangePage(pageOfItems: Array<any>) {
   // update current page of items
   this.pageOfItems = pageOfItems;
+}
+
+Mainrouting( blogid,seourl,header,headerdesc)
+{
+  
+  this.dataService.setblogid=blogid;
+  this.dataService.setheader=header;
+  this.dataService.setheaderdesc=headerdesc;
+  // this.router.navigate(['blog/'+seourl]);
+  this.router.navigate([seourl]);
 }
 
 }

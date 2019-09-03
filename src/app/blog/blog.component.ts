@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Location } from '@angular/common';
+import{Meta,Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-blog',
@@ -12,11 +14,30 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class BlogComponent implements OnInit {
   blogs = new Array<Blog>();
    blogid:number;
+   header:string;
+   seourl:string;
   
 
-  constructor(private dataService: DataserviceService,private route: ActivatedRoute ) {
+  constructor(private dataService: DataserviceService,private route: ActivatedRoute,private location: Location,meta: Meta, title: Title,private router:Router ) {
+    title.setTitle(this.dataService.gettingheader);
+
+    meta.addTags([
+      { name: 'author',   content: 'axn1.com'},
+      { name: 'keywords', content: this.dataService.gettingheader},
+      { name: 'description', content: this.dataService.gettingheaderdesc }
+    ]);
+
     this.route.queryParams.subscribe(params => {
-      this.blogid = this.route.snapshot.params.blogid;
+     let param = this.router.parseUrl(this.router.url);
+
+      // this.blogid = this.route.snapshot.params.blogid;
+      // this.header = this.route.snapshot.params.header;
+      this.blogid = this.dataService.gettingblogid;
+      //this.seourl = param.queryParams.seourl;
+     // this.header = this.route.snapshot.params.header;
+      
+
+      
   });
 
     dataService.getBlogId(this.blogid).subscribe(response =>
@@ -35,12 +56,22 @@ export class BlogComponent implements OnInit {
               
 
           );
+
+          
+
         });
+
+           
+
       });
    }
 
   ngOnInit() {
+    let param = this.router.parseUrl(this.router.url);
+    console.log(param.queryParams.blogid)
   }
  
-
+  cancel() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
 }

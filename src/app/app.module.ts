@@ -10,6 +10,7 @@ import { BlogComponent } from './blog/blog.component';
 import { SafehtmlPipe } from './safehtml.pipe';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { SafehtmlPipe } from './safehtml.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+   
     
   ],
   providers: [],
