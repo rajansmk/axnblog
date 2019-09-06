@@ -4,6 +4,7 @@ import {Bloghome} from '../../classall/bloghome';
 import { DataserviceService } from '../../dataservice.service'
 import{Meta,Title} from "@angular/platform-browser";
 import { Router } from '@angular/router';
+import { MetaserviceService } from 'src/app/metaservice.service';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,14 @@ export class HomeComponent implements OnInit  {
   pageOfItems: Array<any>;
  
 
-  constructor(private dataService: DataserviceService,meta: Meta, title: Title,private router:Router) { 
-    title.setTitle('Angular 8,asp.net core tutorial');
+  constructor(private dataService: DataserviceService,private metservice:MetaserviceService,private router:Router) { 
+    // title.setTitle('Angular 8,asp.net core tutorial');
 
-    meta.addTags([
-      { name: 'author',   content: 'axn1.com'},
-      { name: 'keywords', content: 'angular8 tutorial, asp.net web api,asp.net core,asp.net core web api'},
-      { name: 'description', content: 'Tutorial of asp.net core and angular tutorial' }
-    ]);
+    // meta.addTags([
+    //   { name: 'author',   content: 'axn1.com'},
+    //   { name: 'keywords', content: 'angular8 tutorial, asp.net web api,asp.net core,asp.net core web api'},
+    //   { name: 'description', content: 'Tutorial of asp.net core and angular tutorial' }
+    // ]);
 
     // this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
     // this.meta.updateTag({ name: 'twitter:site', content: '@angularfirebase' });
@@ -59,6 +60,8 @@ export class HomeComponent implements OnInit  {
   
 
   ngOnInit() {
+    this.metservice.tagCreation('Angular 8,asp.net core tutorial','Tutorial of asp.net core and angular tutorial',
+    'angular tutorial,angular 8,asp.net core tutorial,asp.net mvc')
   }
 //paging
 onChangePage(pageOfItems: Array<any>) {

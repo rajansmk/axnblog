@@ -8,8 +8,9 @@ export class Blog {
   public created_date:string;
   public catid:number;
   public groupid:number;
+  public meta_keywords:string;
  
-  constructor(blogid:number, blog_desc:string, blog_header: string,blog_headerdesc:string,blog_keywords:string,created_date:string,catid:number,groupid:number) {
+  constructor(blogid:number, blog_desc:string, blog_header: string,blog_headerdesc:string,blog_keywords:string,created_date:string,catid:number,groupid:number,meta_keywords:string) {
     this.blogid = blogid;
     this.blog_desc = blog_desc;
     this.blog_header = blog_header;
@@ -18,6 +19,7 @@ export class Blog {
     this.created_date = created_date;
     this.catid = catid;
     this.groupid = groupid;
+    this.meta_keywords = meta_keywords;
   }
 }
 

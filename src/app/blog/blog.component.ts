@@ -5,6 +5,7 @@ import { Blog } from '../blog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import{Meta,Title} from "@angular/platform-browser";
+import { MetaserviceService } from '../metaservice.service';
 
 @Component({
   selector: 'app-blog',
@@ -16,19 +17,29 @@ export class BlogComponent implements OnInit {
    blogid:number;
    header:string;
    seourl:string;
+   href :string;
+   urlkeyworkd:string;
+
+   title:string;
+   keywords:string;
+   description:string;
   
 
-  constructor(private dataService: DataserviceService,private route: ActivatedRoute,private location: Location,meta: Meta, title: Title,private router:Router ) {
-    title.setTitle(this.dataService.gettingheader);
-
-    meta.addTags([
-      { name: 'author',   content: 'axn1.com'},
-      { name: 'keywords', content: this.dataService.gettingheader},
-      { name: 'description', content: this.dataService.gettingheaderdesc }
-    ]);
+  constructor(private dataService: DataserviceService,private route: ActivatedRoute,private location: Location,private meteservice:MetaserviceService,private router:Router ) {
+    // title.setTitle(this.dataService.gettingheader);
+    
+    // meta.addTags([
+    //   { name: 'author',   content: 'axn1.com'},
+    //   { name: 'keywords', content: this.dataService.gettingheader},
+    //   { name: 'description', content: this.dataService.gettingheaderdesc }
+    // ]);
 
     this.route.queryParams.subscribe(params => {
      let param = this.router.parseUrl(this.router.url);
+     this.href = this.router.url;
+     this.urlkeyworkd = this.href.substr(1);
+     console.log(this.href);
+     console.log(this.urlkeyworkd);
 
       // this.blogid = this.route.snapshot.params.blogid;
       // this.header = this.route.snapshot.params.header;
@@ -40,10 +51,15 @@ export class BlogComponent implements OnInit {
       
   });
 
-    dataService.getBlogId(this.blogid).subscribe(response =>
+    dataService.getBlogId(this.blogid,this.urlkeyworkd).subscribe(response =>
       {
         this.blogs = response.map(item =>
         {
+          this.meteservice.tagCreation(item.blog_header, 
+            item.blog_headerdesc,item.meta_keywords
+          )
+
+          
           return new Blog(
             item.blogid,
             item.blog_desc,
@@ -53,6 +69,7 @@ export class BlogComponent implements OnInit {
               item.created_date,
               item.catid,
               item.groupid,
+              item.meta_keywords
               
 
           );
@@ -67,8 +84,10 @@ export class BlogComponent implements OnInit {
    }
 
   ngOnInit() {
-    let param = this.router.parseUrl(this.router.url);
-    console.log(param.queryParams.blogid)
+    // let param = this.router.parseUrl(this.router.url);
+    // console.log(param.queryParams.blogid)
+   
+
   }
  
   cancel() {

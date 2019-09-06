@@ -8,8 +8,13 @@ import {Bloghome} from './classall/bloghome';
   providedIn: 'root'
 })
 export class DataserviceService {
-  //baseUrl:string = "http://www.axn1.com";
-   baseUrl:string = "http://localhost/uat/axn";
+  baseUrl:string = "http://www.mtutorial.com";
+  // baseUrl:string = "http://localhost/uat/axn";
+
+   //hide the parameter id in url and show
+  _blogid: number;
+  _blogheader:string;
+  _blogheaderdesc:string;
 
   constructor(private httpClient : HttpClient) { }
 
@@ -22,18 +27,18 @@ public getBlog(): Observable<Bloghome[]>
  
     return this.httpClient.get<Bloghome[]>(this.baseUrl + '/api/getdata.php');
   }
-  public getBlogId(blogid: number): Observable<Blog[]>
+  public getBlogId(blogid: number,urlkeyword :string): Observable<Blog[]>
   {
    // const url = 'http://localhost/uat/api/getdata.php';
  
-    return this.httpClient.get<Blog[]>(this.baseUrl + '/api/getdataone.php?'+ 'blogid=' + blogid);
+    return this.httpClient.get<Blog[]>(
+      this.baseUrl + '/api/getdataone.php?'+ 'blogid=' + blogid + '&urlkeyword=' + urlkeyword
+      );
   }
+ 
 
 
-  //hide the parameter id in url and show
-  _blogid: number;
-  _blogheader:string;
-  _blogheaderdesc:string;
+  
 
   set setblogid(value: number) {
      this._blogid = value;

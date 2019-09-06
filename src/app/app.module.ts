@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { BlogComponent } from './blog/blog.component';
 import { SafehtmlPipe } from './safehtml.pipe';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 
 
 
@@ -26,7 +27,7 @@ import { SafehtmlPipe } from './safehtml.pipe';
    
     
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

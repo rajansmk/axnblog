@@ -1,0 +1,7 @@
+.handcursor{
+    cursor: pointer;
+    color: blue !important;
+}
+.page-link{
+    cursor: pointer !important;
+}
