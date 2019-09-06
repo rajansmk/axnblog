@@ -1,7 +1,16 @@
 .handcursor{
     cursor: pointer;
-    color: blue !important;
+    color: #296f3d  !important;
 }
 .page-link{
     cursor: pointer !important;
 }
+.page-item.active .page-link
+{
+    cursor: pointer !important;
+    background-color: #296f3d !important;
+}
+.navback{
+    background-color: #a5ceb1;
+    border-color: white;
+  }
