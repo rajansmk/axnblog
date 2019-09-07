@@ -6,3 +6,7 @@ pre{
     background-color: #a5ceb1;
     border-color: white;
   }
+  img {
+	max-width:100%;
+	height:auto!important;
+}

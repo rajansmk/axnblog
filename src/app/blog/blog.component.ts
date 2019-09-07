@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import{Meta,Title} from "@angular/platform-browser";
 import { MetaserviceService } from '../metaservice.service';
+import { PagerServiceService } from '../pager-service.service';
 
 @Component({
   selector: 'app-blog',
@@ -23,9 +24,13 @@ export class BlogComponent implements OnInit {
    title:string;
    keywords:string;
    description:string;
+
   
 
-  constructor(private dataService: DataserviceService,private route: ActivatedRoute,private location: Location,private meteservice:MetaserviceService,private router:Router ) {
+   pageno:number;
+  
+
+  constructor(private dataService: DataserviceService,private pageservice: PagerServiceService,private route: ActivatedRoute,private location: Location,private meteservice:MetaserviceService,private router:Router ) {
     // title.setTitle(this.dataService.gettingheader);
     
     // meta.addTags([
@@ -44,6 +49,7 @@ export class BlogComponent implements OnInit {
       // this.blogid = this.route.snapshot.params.blogid;
       // this.header = this.route.snapshot.params.header;
       this.blogid = this.dataService.gettingblogid;
+      this.pageno = this.pageservice.getpageno;
       //this.seourl = param.queryParams.seourl;
      // this.header = this.route.snapshot.params.header;
       
@@ -90,7 +96,8 @@ export class BlogComponent implements OnInit {
 
   }
  
-  cancel() {
+  cancel(pageno) {
+    this.pageservice.setpageno=pageno;
     this.location.back(); // <-- go back to previous location on cancel
   }
 }

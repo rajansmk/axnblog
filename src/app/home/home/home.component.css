@@ -14,3 +14,13 @@
     background-color: #a5ceb1;
     border-color: white;
   }
+  .mrleft{
+      margin-left: 10px;
+      background-color: #6ead80 ;
+      cursor: pointer !important;
+  }
+  
+  .active
+  {
+    background-color: #96a89f !important;
+  }

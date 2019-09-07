@@ -1,7 +1,7 @@
  <!--- \\\\\\\Post-->
  <div class="card gedf-card ">
           
-		<div class="card-body" *ngFor="let blog of pageOfItems">
+		<div class="card-body" *ngFor="let blog of pagedItems">
 		  <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
 		  <!-- <a class="card-link" [routerLink]="['/blog', blog.name,blog.blogid, blog.blog_keywords]" > -->
 			<a class="card-link navback handcursor" (click)="Mainrouting(blog.blogid,blog.blog_keywords,blog.blog_header,blog.blog_headerdesc)" >
@@ -29,6 +29,26 @@
 		</div> -->
 	  </div>
 	  <div class="card-footer pb-0 pt-3">
-			<jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+		
+			<!-- pager -->
+			
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li class="btn btn-info mrleft" (click)="setPage(1)" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a  >First</a>
+                </li>
+                <li class="btn btn-info mrleft" (click)="setPage(pager.currentPage - 1)" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a  >Previous</a>
+                </li>
+                <li class="btn btn-info mrleft" (click)="setPage(page)"  *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a  >{{page}}</a>
+                </li>
+                <li class="btn btn-info mrleft" (click)="setPage(pager.currentPage + 1)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a  >Next</a>
+                </li>
+                <li class="btn btn-info mrleft" (click)="setPage(pager.totalPages)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a  >Last</a>
+                </li>
+            </ul>
+		
 		</div>
 	  <!-- Post /////-->

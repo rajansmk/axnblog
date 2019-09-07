@@ -3,3 +3,22 @@ pre{
     background-color: #f0f3f1 !important;
     padding: 10px;
   }
+  img {
+    max-width:100%;
+    height:auto!important;
+  }
+  .html5-video-container {
+    position: relative !important;
+    padding-bottom: 56.25% !important;
+    padding-top: 30px !important; height: 0 !important; overflow: hidden !important;
+    }
+    
+    .html5-video-container iframe,
+    .html5-video-container object,
+    .html5-video-container embed {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    }
