@@ -74,6 +74,7 @@ export class HomeComponent implements OnInit  {
               item.blog_header,
               item.blog_headerdesc,
               item.blog_keywords,
+              item.created_date,
               item.name,
               
 

@@ -25,6 +25,9 @@ export class BlogComponent implements OnInit {
    keywords:string;
    description:string;
 
+   meta_keywords:string;
+   keyword:string[];
+
   
 
    pageno:number;
@@ -43,8 +46,8 @@ export class BlogComponent implements OnInit {
      let param = this.router.parseUrl(this.router.url);
      this.href = this.router.url;
      this.urlkeyworkd = this.href.substr(1);
-     console.log(this.href);
-     console.log(this.urlkeyworkd);
+    // console.log(this.href);
+     //console.log(this.urlkeyworkd);
 
       // this.blogid = this.route.snapshot.params.blogid;
       // this.header = this.route.snapshot.params.header;
@@ -64,7 +67,10 @@ export class BlogComponent implements OnInit {
           this.meteservice.tagCreation(item.blog_header, 
             item.blog_headerdesc,item.meta_keywords
           )
-
+          this.meta_keywords=item.meta_keywords;
+          var splitted  = this.meta_keywords.split(',');
+          this.keyword=splitted;
+          console.log(splitted);
           
           return new Blog(
             item.blogid,
@@ -87,12 +93,15 @@ export class BlogComponent implements OnInit {
            
 
       });
+     
    }
 
   ngOnInit() {
     // let param = this.router.parseUrl(this.router.url);
     // console.log(param.queryParams.blogid)
-   
+    //this.meta_keywords = this.blogs.map((item)=> item.meta_keywords);
+    
+   // console.log(this.meta_keywords);
 
   }
  

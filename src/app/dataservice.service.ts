@@ -9,7 +9,7 @@ import {Bloghome} from './classall/bloghome';
 })
 export class DataserviceService {
   baseUrl:string = "http://www.mtutorial.com";
-   //baseUrl:string = "http://localhost/uat/axn";
+  // baseUrl:string = "http://localhost/uat/axn";
 
    //hide the parameter id in url and show
   _blogid: number;
