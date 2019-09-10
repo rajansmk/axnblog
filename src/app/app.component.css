@@ -13,4 +13,8 @@
   background-color: #a5ceb1;
   border-color: none;
 }
+.badge-primary {
+  color: #fff;
+  background-color: #91d0a3 !important;
+}
 

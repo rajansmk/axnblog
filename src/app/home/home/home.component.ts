@@ -17,6 +17,9 @@ import { PagerServiceService } from 'src/app/pager-service.service';
 })
 export class HomeComponent implements OnInit  {
 
+  meta_keywords:string;
+   keyword:string[];
+
   pageItems = new Array<Bloghome>();
   pageOfItems: Array<any>;
   pagedItems: any[];
@@ -69,6 +72,10 @@ export class HomeComponent implements OnInit  {
       {
         this.pageItems = response.map(item =>
         {
+          // this.meta_keywords=item.meta_keywords;
+          // var splitted  = this.meta_keywords.split(',');
+          // this.keyword=splitted;
+
           return new Bloghome(
             item.blogid,
               item.blog_header,
@@ -76,6 +83,7 @@ export class HomeComponent implements OnInit  {
               item.blog_keywords,
               item.created_date,
               item.name,
+              item.meta_keywords
               
 
           );

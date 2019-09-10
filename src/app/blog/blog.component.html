@@ -18,8 +18,8 @@
         <!-- {{blog.blog_desc | safehtml}} -->
       </div>
       <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Back </a>
-      <div *ngFor="let keywords of keyword">
-        <span class="badge badge-primary navback">{{keywords}}</span>
+      <div >
+        <span *ngFor="let keywords of keyword" class="badge badge-primary navback ml-2">{{keywords}}</span>
         <!-- <span class="badge badge-primary navback">Android</span>
         <span class="badge badge-primary navback">PHP</span>
         <span class="badge badge-primary navback">Node.js</span>

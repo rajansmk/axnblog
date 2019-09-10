@@ -62,6 +62,12 @@ export class BlogComponent implements OnInit {
 
     dataService.getBlogId(this.blogid,this.urlkeyworkd).subscribe(response =>
       {
+        //redirect home component if data null
+        if(response.length==0)
+        {
+          this.router.navigateByUrl('/');
+          return;
+        }
         this.blogs = response.map(item =>
         {
           this.meteservice.tagCreation(item.blog_header, 
@@ -70,7 +76,7 @@ export class BlogComponent implements OnInit {
           this.meta_keywords=item.meta_keywords;
           var splitted  = this.meta_keywords.split(',');
           this.keyword=splitted;
-          console.log(splitted);
+          //console.log(splitted);
           
           return new Blog(
             item.blogid,
