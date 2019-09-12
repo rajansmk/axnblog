@@ -24,3 +24,12 @@
   {
     background-color: #96a89f !important;
   }
+  .frm{
+  
+    width: 98.5% !important;
+  }
+  input[name="dynmicUserIds"] {
+    
+    width: 100%;
+  }
+ 

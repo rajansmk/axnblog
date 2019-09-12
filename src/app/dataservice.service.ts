@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import {Blog} from './blog';
 import {Bloghome} from './classall/bloghome';
 import { Category } from './classall/category';
+import { Autocomplete } from './classall/autocomplete';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataserviceService {
- // baseUrl:string = "http://www.mtutorial.com";
-  baseUrl:string = "http://localhost/uat/axn";
+  baseUrl:string = "http://www.mtutorial.com";
+ // baseUrl:string = "http://localhost/uat/axn";
 
    //hide the parameter id in url and show
   _blogid: number;
@@ -40,6 +41,14 @@ public getBlog(): Observable<Bloghome[]>
   public get_category() : Observable<Category[]>{
     return this.httpClient.get<Category[]>(this.baseUrl + '/api/getdataallcategory.php');
 }
+public autoComplete(search :string): Observable<Autocomplete[]>
+  {
+   // const url = 'http://localhost/uat/api/getdata.php';
+ 
+    return this.httpClient.get<Autocomplete[]>(
+      this.baseUrl + '/api/autocomplete.php?'+ 'search=' + search 
+      );
+  }
 
   
 

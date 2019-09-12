@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { MetaserviceService } from 'src/app/metaservice.service';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PagerServiceService } from 'src/app/pager-service.service';
+import { Autocomplete } from 'src/app/classall/autocomplete';
+import * as $ from 'jquery';
 
 
 
@@ -19,11 +21,14 @@ export class HomeComponent implements OnInit  {
 
   meta_keywords:string;
    keyword:string[];
+   public ProductDetails: object = [];
 
   pageItems = new Array<Bloghome>();
   pageOfItems: Array<any>;
   pagedItems: any[];
   pageno :number =1;
+
+  autoCompletArr = new Array<Autocomplete>();
 
 
  
@@ -68,6 +73,16 @@ export class HomeComponent implements OnInit  {
   
 
   ngOnInit() {
+    $(document).on('click', function (event) {
+      if (!$(event.target).closest('#spnauto').length ) {
+        $('#ulautocomplete').hide();
+      }
+      else{
+        $('#ulautocomplete').show();
+      }
+      
+    });
+    
     this.dataService.getBlog().subscribe(response =>
       {
         this.pageItems = response.map(item =>
@@ -75,6 +90,9 @@ export class HomeComponent implements OnInit  {
           // this.meta_keywords=item.meta_keywords;
           // var splitted  = this.meta_keywords.split(',');
           // this.keyword=splitted;
+          this.dataService.setblogid=item.blogid;
+          this.dataService.setheader=item.blog_header;
+          this.dataService.setheaderdesc=item.blog_headerdesc;
 
           return new Bloghome(
             item.blogid,
@@ -91,7 +109,7 @@ export class HomeComponent implements OnInit  {
         this.setPage(this.pageno);
       });
       
-
+     
     this.metservice.tagCreation('Angular 8,asp.net core tutorial','Tutorial of asp.net core and angular tutorial',
     'angular tutorial,angular 8,asp.net core tutorial,asp.net mvc')
   }
@@ -106,9 +124,9 @@ export class HomeComponent implements OnInit  {
 Mainrouting( blogid,seourl,header,headerdesc)
 {
   
-  this.dataService.setblogid=blogid;
-  this.dataService.setheader=header;
-  this.dataService.setheaderdesc=headerdesc;
+  // this.dataService.setblogid=blogid;
+  // this.dataService.setheader=header;
+  // this.dataService.setheaderdesc=headerdesc;
   // this.router.navigate(['blog/'+seourl]);
   this.router.navigate([seourl]);
 }
@@ -122,4 +140,53 @@ setPage(page: number) {
   this.pagedItems = this.pageItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
 
+
+getUserIdsFirstWay($event) {
+  let search = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
+  // this.userList1 = [];
+
+  // if (userId.length > 2) {
+  //   if ($event.timeStamp - this.lastkeydown1 > 200) {
+  //     this.userList1 = this.searchFromArray(this.userData, userId);
+  //   }
+  // }
+  if (search.length > 2) {
+  this.dataService.autoComplete(search).subscribe(response =>
+    {
+      this.autoCompletArr = response.map(item =>
+      {
+        
+
+        return new Autocomplete(
+          item.blogid,
+            item.blog_header,
+            item.blog_keywords
+            
+
+        );
+      });
+     
+    });
+  }
+ 
+    
+   
+ 
 }
+
+
+
+
+// searchFromArray(arr, regex) {
+//   let matches = [], i;
+//   for (i = 0; i < arr.length; i++) {
+//     if (arr[i].match(regex)) {
+//       matches.push(arr[i]);
+//     }
+//   }
+//   return matches;
+// };
+
+}
+
+

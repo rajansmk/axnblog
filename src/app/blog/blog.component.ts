@@ -113,6 +113,13 @@ export class BlogComponent implements OnInit {
  
   cancel(pageno) {
     this.pageservice.setpageno=pageno;
-    this.location.back(); // <-- go back to previous location on cancel
+
+    if(pageno ==undefined)
+    {
+      this.router.navigateByUrl('/');
+    }
+    else{
+      this.location.back(); // <-- go back to previous location on cancel
+    }
   }
 }
