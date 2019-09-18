@@ -11,23 +11,24 @@ import { Autocomplete } from './classall/autocomplete';
 })
 export class DataserviceService {
   baseUrl:string = "http://www.mtutorial.com";
- // baseUrl:string = "http://localhost/uat/axn";
+//baseUrl:string = "http://localhost/uat/axn";
 
    //hide the parameter id in url and show
   _blogid: number;
   _blogheader:string;
   _blogheaderdesc:string;
+  _catid: number;
 
   constructor(private httpClient : HttpClient) { }
 
   get_products(){
     return this.httpClient.get(this.baseUrl + '/api/getdata.php');
 }
-public getBlog(): Observable<Bloghome[]>
+public getBlog(catid): Observable<Bloghome[]>
   {
    // const url = 'http://localhost/uat/api/getdata.php';
  
-    return this.httpClient.get<Bloghome[]>(this.baseUrl + '/api/getdata.php');
+    return this.httpClient.get<Bloghome[]>(this.baseUrl + '/api/getdata.php?'+ 'catid=' + catid);
   }
   public getBlogId(blogid: number,urlkeyword :string): Observable<Blog[]>
   {
@@ -72,5 +73,14 @@ get gettingheaderdesc(): string {
   return this._blogheaderdesc;
 }
   //end blogid
+
+  //catid maintain
+  set setcatid(value: number) {
+    this._catid = value;
+ }
+ get getcatid(): number {
+  return this._catid;
+}
+  //end
 
 }

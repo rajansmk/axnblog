@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit  {
   pageOfItems: Array<any>;
   pagedItems: any[];
   pageno :number =1;
+  catid :number =0 ;
 
   autoCompletArr = new Array<Autocomplete>();
 
@@ -82,8 +83,16 @@ export class HomeComponent implements OnInit  {
       }
       
     });
+    if(this.dataService.getcatid ==undefined)
+    {
+      this.catid =0;
+    }
+    else{
+      this.catid = this.dataService.getcatid;
+    }
     
-    this.dataService.getBlog().subscribe(response =>
+    
+    this.dataService.getBlog(this.catid).subscribe(response =>
       {
         this.pageItems = response.map(item =>
         {
@@ -111,7 +120,7 @@ export class HomeComponent implements OnInit  {
       
      
     this.metservice.tagCreation('Angular 8,asp.net core tutorial','Tutorial of asp.net core and angular tutorial',
-    'angular tutorial,angular 8,asp.net core tutorial,asp.net mvc')
+    'angular tutorial,angular 8,asp.net core tutorial,asp.net mvc','')
   }
 //paging
 // onChangePage(pageOfItems: Array<any>,currentpage) {
@@ -175,7 +184,10 @@ getUserIdsFirstWay($event) {
 }
 
 
-
+ getblogcatfilter(catid) 
+{
+  this.router.navigateByUrl('/');
+}
 
 // searchFromArray(arr, regex) {
 //   let matches = [], i;

@@ -71,7 +71,7 @@ export class BlogComponent implements OnInit {
         this.blogs = response.map(item =>
         {
           this.meteservice.tagCreation(item.blog_header, 
-            item.blog_headerdesc,item.meta_keywords
+            item.blog_headerdesc,item.meta_keywords,item.blog_keywords
           )
           this.meta_keywords=item.meta_keywords;
           var splitted  = this.meta_keywords.split(',');

@@ -77,7 +77,11 @@
           <div class="card-body">
             <h5 class="card-title">Tutorial Category</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let cat of Category">
+                <li class="list-group-item d-flex justify-content-between align-items-center handcursor"  (click)="Maincategory(0)" >
+                    All Category
+                    <span class="badge badge-primary badge-pill">{{allcount}}</span>
+                  </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center handcursor" *ngFor="let cat of Category" (click)="Maincategory(cat.catid)" >
                 {{cat.name}}
                 <span class="badge badge-primary badge-pill">{{cat.categorycount}}</span>
               </li>
