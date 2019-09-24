@@ -110,7 +110,8 @@ export class HomeComponent implements OnInit  {
               item.blog_keywords,
               item.created_date,
               item.name,
-              item.meta_keywords
+              item.meta_keywords,
+              item.catid
               
 
           );

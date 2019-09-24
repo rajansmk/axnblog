@@ -1,3 +1,7 @@
+
+<!-- <script type="application/ld+json">{{jsonLD}}</script>; -->
+
+
 <div class="card gedf-card">
           
     <div class="card-body" *ngFor="let blog of blogs">
@@ -27,6 +31,24 @@
         <span class="badge badge-primary navback">Paython</span> -->
       </div>
     </div>
+
+
+    <!-- related blog -->
+    <div class="card-body" *ngFor="let blogcat of blogscategory">
+		 
+					<a class="card-link navback handcursor" (click)="urlRoute('/' + blogcat.blog_keywords)" [routerLink]="'/' + blogcat.blog_keywords"  >
+				
+			<h5 class="card-title"> {{blogcat.blog_header}}</h5>
+			
+		  </a>
+
+		  <p class="card-text">
+			{{blogcat.blog_headerdesc}}
+		  </p>
+		  <div>
+			
+		  </div>
+		</div>
     <!-- <div class="card-footer">
       <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
       <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>

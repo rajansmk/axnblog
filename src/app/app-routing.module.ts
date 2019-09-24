@@ -6,7 +6,7 @@ import{BlogComponent} from './blog/blog.component'
 const routes: Routes = [
   {path:'',component:HomeComponent},
  
-  {path:'**',component:BlogComponent}
+  {path:'**',component:BlogComponent,}
   //,
   // {path:'blog/:category/:blogid/:header',component:BlogComponent}
   //{path:'blog/:seourl',component:BlogComponent}

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import{Meta,Title} from "@angular/platform-browser";
 import { MetaserviceService } from '../metaservice.service';
 import { PagerServiceService } from '../pager-service.service';
+import { Bloghome } from '../classall/bloghome';
 
 @Component({
   selector: 'app-blog',
@@ -15,6 +16,7 @@ import { PagerServiceService } from '../pager-service.service';
 })
 export class BlogComponent implements OnInit {
   blogs = new Array<Blog>();
+  blogscategory = new Array<Bloghome>();
    blogid:number;
    header:string;
    seourl:string;
@@ -28,7 +30,7 @@ export class BlogComponent implements OnInit {
    meta_keywords:string;
    keyword:string[];
 
-  
+  relatedcategoryid:number;
 
    pageno:number;
   
@@ -76,6 +78,7 @@ export class BlogComponent implements OnInit {
           this.meta_keywords=item.meta_keywords;
           var splitted  = this.meta_keywords.split(',');
           this.keyword=splitted;
+          this.relatedcategoryid=item.catid;
           //console.log(splitted);
           
           return new Blog(
@@ -96,9 +99,16 @@ export class BlogComponent implements OnInit {
 
         });
 
-           
+        this.categorybind(this.relatedcategoryid);
 
       });
+
+
+     
+
+
+
+      
      
    }
 
@@ -109,7 +119,13 @@ export class BlogComponent implements OnInit {
     
    // console.log(this.meta_keywords);
 
+   // related category
+
+   
+
   }
+
+  
  
   cancel(pageno) {
     this.pageservice.setpageno=pageno;
@@ -122,4 +138,44 @@ export class BlogComponent implements OnInit {
       this.location.back(); // <-- go back to previous location on cancel
     }
   }
+
+
+  categorybind(categoryid)
+  {
+    this.dataService.getBlog(categoryid).subscribe(response =>
+      {
+        this.blogscategory = response.map(item =>
+        {
+          return new Bloghome(
+            item.blogid,
+              item.blog_header,
+              item.blog_headerdesc,
+              item.blog_keywords,
+              item.created_date,
+              item.name,
+              item.meta_keywords,
+              item.catid
+              
+  
+          );
+        });
+       
+      });
+  }
+
+
+  urlRoute(urlpath) {
+    
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+   //this.child.getblogcatfilter(catid);
+  // this.router.navigateByUrl('/');
+  this.router.navigateByUrl(urlpath)
+  .then(() => {
+    this.router.navigated = false;
+    this.router.navigate([urlpath]);
+  });
+        return ;
+  }
+
+
 }
