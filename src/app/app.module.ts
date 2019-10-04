@@ -9,6 +9,35 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { BlogComponent } from './blog/blog.component';
 import { SafehtmlPipe } from './safehtml.pipe';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import { MyJsonLd } from './my-json-ld';
+import { ShareButtonsModule } from '@ngx-share/buttons';
+import { FormsModule } from '@angular/forms';
+
+
+
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("2292816397695715")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("385146441408-673pvhmbd42scg997fj7ukjal4m5fipn.apps.googleusercontent.com")
+        }
+      ]
+  );
+  return config;
+}
+
 
 
 
@@ -18,16 +47,30 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
     HomeComponent,
     JwPaginationComponent,
     BlogComponent,
-    SafehtmlPipe
+    SafehtmlPipe,
+    MyJsonLd,
+    
+    
+    
+    
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
+    SocialLoginModule,
+    FormsModule,
+    ShareButtonsModule.withConfig({
+      debug: true
+    })
+    
    
     
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy},{
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,7 @@ export class MetaserviceService {
 
      this.title.setTitle(blogtitle);
     
-    
+     this.meta.updateTag({ name: 'title', content: blogtitle });
     this.meta.updateTag({ name: 'author', content: 'mtutorial.com' });
     this.meta.updateTag({ name: 'keywords', content: metakeyword });
     this.meta.updateTag({ name: 'description', content: blogdesc });

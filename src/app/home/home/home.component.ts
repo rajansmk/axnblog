@@ -1,4 +1,4 @@
-import { Component,Input, Output, EventEmitter,  OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component,Input, Output, EventEmitter,  OnChanges, SimpleChanges, OnInit,Renderer2, Inject } from '@angular/core';
 import {Blog} from '../../blog';
 import {Bloghome} from '../../classall/bloghome';
 import { DataserviceService } from '../../dataservice.service'
@@ -8,6 +8,7 @@ import { MetaserviceService } from 'src/app/metaservice.service';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PagerServiceService } from 'src/app/pager-service.service';
 import { Autocomplete } from 'src/app/classall/autocomplete';
+import { DOCUMENT } from '@angular/common';
 import * as $ from 'jquery';
 
 
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit  {
  // paged items
    // pagedItems: any[];
 
-  constructor(private dataService: DataserviceService,private pagerService: PagerServiceService,private metservice:MetaserviceService,private router:Router) { 
+  constructor(private _renderer2: Renderer2 ,@Inject(DOCUMENT) private _document: Document,private dataService: DataserviceService,private pagerService: PagerServiceService,private metservice:MetaserviceService,private router:Router) { 
     // title.setTitle('Angular 8,asp.net core tutorial');
     if(this.pagerService.getpageno)
     {
@@ -74,6 +75,78 @@ export class HomeComponent implements OnInit  {
   
 
   ngOnInit() {
+
+    var me = document.getElementById('myscript');
+    let s;
+    if(me ==undefined)
+    {
+       s = this._renderer2.createElement('script');
+    }
+    else{
+       s = me;
+    }
+    
+    //let s = this._renderer2.createElement('script');
+    s.type = `application/ld+json`;
+    s.id= `myscript`;
+    s.text = `
+        {
+         "@context": "https://schema.org",
+         "@type": "NewsArticle",
+         "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http://www.mtutorial.com/"
+         },
+         "headline": `+`"Tutorial with realtime example code",
+         "image": [
+           "http://www.mtutorial.com/mtutorial.jpg"
+          ],
+         "datePublished": "2015-02-05T08:00:00+08:00",
+         "dateModified": "2015-02-05T09:20:00+08:00",
+         "author": {
+           "@type": "Person",
+           "name": "M-Tutorial"
+         },
+          "publisher": {
+           "@type": "Organization",
+           "name": "M - Tutorial",
+           "logo": {
+             "@type": "ImageObject",
+             "url": "http://www.mtutorial.com/mtutorial.jpg"
+           }
+         },
+         "description": `+`"MTutorial provides the real time practical source for easy way to learn any programming language like angular8,asp.net core and etc "
+        }
+    `;
+    var me = document.getElementById('mylink');
+    let link: HTMLLinkElement;
+    if(me ==undefined)
+    {
+      link = this._document.createElement('link');
+         // let link: HTMLLinkElement = this._document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      link.setAttribute('id', 'mylink');
+      this._document.head.appendChild(link);
+      link.setAttribute('href', this._document.URL);
+    }
+    else{
+      me.setAttribute('rel', 'canonical');
+      me.setAttribute('id', 'mylink');
+      this._document.head.appendChild(me);
+      me.setAttribute('href', this._document.URL);
+      
+         
+}
+
+
+
+    this._renderer2.appendChild(this._document.head, s);
+  //  var me = document.getElementById('myscript');
+
+
+
+
+
     $(document).on('click', function (event) {
       if (!$(event.target).closest('#spnauto').length ) {
         $('#ulautocomplete').hide();

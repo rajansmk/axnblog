@@ -3,7 +3,7 @@
 
 
 <div class="card gedf-card">
-          
+  <!-- <div [innerHTML]="jsonLD"></div> -->
     <div class="card-body" *ngFor="let blog of blogs">
         <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Back </a>
       <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ blog.created_date | date}}</div>
@@ -30,13 +30,56 @@
         <span class="badge badge-primary navback">Ruby</span>
         <span class="badge badge-primary navback">Paython</span> -->
       </div>
+     
+
     </div>
-
-
+    <!-- comment -->
+    <div class="card-body" >
+        <div *ngFor="let comments of comment">
+        <section class="post-heading">
+          <div class="row">
+              <div class="col-md-11">
+                  <div class="media">
+                    <div class="media-left">
+                      <a href="#">
+                        <img class="media-object photo-profile" src="{{comments.img}}" width="40" height="40" alt="...">
+                      </a>
+                    </div>
+                    <div class="media-body" style="margin-left: 10px">
+                      <h5 class="media-heading">{{comments.fullname}}</h5>
+                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{comments.created_date | date}}</div>
+                    </div>
+                  </div>
+              </div>
+               <div class="col-md-1">
+                   <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+               </div>
+          </div>             
+     </section>
+     <section class="post-body">
+         <p>{{comments.comment}}</p>
+     </section>
+    </div>
+     <section class="post-footer">
+         <hr>
+        
+  
+         <div class="input-group input-group-sm ">
+          <textarea placeholder="Comment box" id="strComment" ref-textarea [(ngModel)]="strComment" rows="5"  cols="80" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>  
+          <span class="input-group-btn">
+             <p>Authenticated user only can comment.</p>
+              <button id="sendMessageButton" (click)="sendValues(textarea.value)" *ngIf="hide"   class="btn btn-primary navback" style="margin:10px;vertical-align: center" type="button"><i class="fa fa-send"></i>Send</button>
+          </span>
+         
+      </div>
+     </section>
+     <share-buttons show="11"></share-buttons>
+      </div>
     <!-- related blog -->
     <div class="card-body" *ngFor="let blogcat of blogscategory">
 		 
-					<a class="card-link navback handcursor" (click)="urlRoute('/' + blogcat.blog_keywords)" [routerLink]="'/' + blogcat.blog_keywords"  >
+          <a class="card-link navback bloglink" (click)="urlRoute('/' + blogcat.blog_keywords)" [routerLink]="'/' + blogcat.blog_keywords"  >
+            <!-- <a class="card-link navback handcursor" [routerLink]="'/' + blogcat.blog_keywords"  > -->
 				
 			<h5 class="card-title"> {{blogcat.blog_header}}</h5>
 			
@@ -44,11 +87,15 @@
 
 		  <p class="card-text">
 			{{blogcat.blog_headerdesc}}
-		  </p>
+      </p>
+     
 		  <div>
 			
-		  </div>
-		</div>
+      </div>
+      
+    </div>
+    
+   
     <!-- <div class="card-footer">
       <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
       <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>

@@ -5,12 +5,16 @@ import {Blog} from './blog';
 import {Bloghome} from './classall/bloghome';
 import { Category } from './classall/category';
 import { Autocomplete } from './classall/autocomplete';
+import { BlogUser } from './classall/blog-user';
+import { Comments } from './classall/comments';
+import { map } from 'rxjs/operators';
+import { Savecomments } from './classall/savecomment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataserviceService {
-  baseUrl:string = "http://www.mtutorial.com";
+ baseUrl:string = "https://www.mtutorial.com";
 //baseUrl:string = "http://localhost/uat/axn";
 
    //hide the parameter id in url and show
@@ -50,6 +54,14 @@ public autoComplete(search :string): Observable<Autocomplete[]>
       this.baseUrl + '/api/autocomplete.php?'+ 'search=' + search 
       );
   }
+  public getComments(blogid: number): Observable<Comments[]>
+  {
+   // const url = 'http://localhost/uat/api/getdata.php';
+ 
+    return this.httpClient.get<Comments[]>(
+      this.baseUrl + '/api/blogcomments.php?'+ 'blogid=' + blogid 
+      );
+  }
 
   
 
@@ -82,5 +94,42 @@ get gettingheaderdesc(): string {
   return this._catid;
 }
   //end
+  //google authentication
+  saveBlogUser(bloguser: BlogUser): Observable<BlogUser[]> {
+    return this.httpClient.post<BlogUser[]>(this.baseUrl + '/api/savebloguser.php', bloguser);
+      
+  }
+  //token
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  deleteToken() {
+    localStorage.removeItem('token');
+  }
+  isLoggedIn() {
+    const usertoken = this.getToken();
+    if (usertoken != null) {
+      return true
+    }
+    return false;
+  }
+
+  //comment save
+  
+  saveComment(comments: Savecomments) {
+    return this.httpClient.post(this.baseUrl + '/api/savecomment.php', comments)
+      .pipe(map(
+        response => {
+          return response;
+        }));
+  }
+  //comment
+  
+
 
 }
