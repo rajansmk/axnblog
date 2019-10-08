@@ -12,6 +12,9 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
 import { MyJsonLd } from './my-json-ld';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { FormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
+
 
 
 
@@ -21,6 +24,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from "angular-6-social-login";
+import { UserpostComponent } from './userpost/userpost.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -49,6 +53,7 @@ export function getAuthServiceConfigs() {
     BlogComponent,
     SafehtmlPipe,
     MyJsonLd,
+    UserpostComponent,
     
     
     
@@ -60,6 +65,7 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     SocialLoginModule,
     FormsModule,
+    CKEditorModule,
     ShareButtonsModule.withConfig({
       debug: true
     })
