@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@ngx-share/button/themes/default/default-theme';
 pre{
-    background-color: #f0f3f1 !important;
+    /* background-color: #f0f3f1 !important; */
     padding: 10px;
+    border-left: 4px solid #6b5;
+    box-shadow: 6px 3px 8px #d4d4d4;
   }
   img {
     max-width:100%;
@@ -23,3 +25,10 @@ pre{
     width: 100% !important;
     height: 100% !important;
     }
+    @media (min-width: 768px) {
+      .fixed-posi {
+        
+        min-height:100%;
+          position:fixed;
+      }
+  }

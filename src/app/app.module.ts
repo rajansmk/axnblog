@@ -25,6 +25,8 @@ import {
   FacebookLoginProvider,
 } from "angular-6-social-login";
 import { UserpostComponent } from './userpost/userpost.component';
+import { TutorialsidebarComponent } from './tutorialsidebar/tutorialsidebar.component';
+import { MainsidebarComponent } from './mainsidebar/mainsidebar.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -54,6 +56,8 @@ export function getAuthServiceConfigs() {
     SafehtmlPipe,
     MyJsonLd,
     UserpostComponent,
+    TutorialsidebarComponent,
+    MainsidebarComponent,
     
     
     

@@ -1,6 +1,8 @@
 pre{
     background-color: #f0f3f1 !important;
     padding: 10px;
+    border-left: 4px solid #6b5;
+    box-shadow: 6px 3px 8px #d4d4d4;
 }
 .navback{
     background-color: #a5ceb1;
@@ -34,3 +36,34 @@ textarea {
   padding: 5px 8px;
   transition: background-color 0.2s ease 0s;
 }
+
+#sticky-footer {
+  flex-shrink: none;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
+}
+.navbar-brand {
+
+font-size: 2.25rem;
+font-weight: 800;
+}
+.navback{
+background-color: #a5ceb1;
+border-color: none;
+}
+.badge-primary {
+color: #fff;
+background-color: #91d0a3 !important;
+}
+.handcursor{
+cursor: pointer;
+
+}
+.bloglink{
+cursor: pointer;
+color: #296f3d  !important;
+}
+
+
+

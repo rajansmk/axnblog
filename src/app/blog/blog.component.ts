@@ -14,6 +14,10 @@ import { HighlightResult } from 'ngx-highlightjs';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { Comments } from '../classall/comments';
 import { Savecomments } from '../classall/savecomment';
+import {AuthService,FacebookLoginProvider,GoogleLoginProvider} from 'angular-6-social-login';
+import { BlogUser } from '../classall/blog-user';
+import { Category } from '../classall/category';
+import { Subscription } from 'rxjs';
 
 
 
@@ -24,6 +28,13 @@ import { Savecomments } from '../classall/savecomment';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+  // allcount:string;
+  bloguser:BlogUser[];
+  userid:number;
+  loginbtn:boolean;
+  logoutbtn:boolean;
+  // Category =new Array<Category>();
+
   blogs = new Array<Blog>();
   blogscategory = new Array<Bloghome>();
    comment =  new Array<Comments>();
@@ -45,7 +56,7 @@ export class BlogComponent implements OnInit {
    pageno:number;
    hide:boolean =false;
    strComment: string;
-
+   userSubscription: Subscription;
   //  jsonLD: SafeHtml;
   //  strhtml:string;
    
@@ -53,7 +64,7 @@ export class BlogComponent implements OnInit {
    
   
 
-  constructor(private _elementRef : ElementRef,private _renderer2: Renderer2 ,@Inject(DOCUMENT) private _document: Document,private sanitizer: DomSanitizer,private dataService: DataserviceService,private pageservice: PagerServiceService,private route: ActivatedRoute,private location: Location,private meteservice:MetaserviceService,private router:Router )
+  constructor(private socialAuthService: AuthService,private _elementRef : ElementRef,private _renderer2: Renderer2 ,@Inject(DOCUMENT) private _document: Document,private sanitizer: DomSanitizer,private dataService: DataserviceService,private pageservice: PagerServiceService,private route: ActivatedRoute,private location: Location,private meteservice:MetaserviceService,private router:Router )
    {
     // title.setTitle(this.dataService.gettingheader);
     
@@ -63,7 +74,9 @@ export class BlogComponent implements OnInit {
     //   { name: 'description', content: this.dataService.gettingheaderdesc }
     // ]);
 
-   
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+  };
 
 
      
@@ -76,6 +89,37 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
 
+    if(this.dataService.isLoggedIn())
+    {
+      console.log("loggedin");
+      this.loginbtn=false;
+      this.logoutbtn=true
+    }
+    else{
+     this.loginbtn=true;
+     this.logoutbtn=false
+    }
+
+    
+
+    // this.dataService.get_category().subscribe(response =>
+    //   {
+    //     this.Category = response.map(item =>
+    //     {
+    //       this.allcount=item.allcount;
+
+    //       return new Category(
+    //         item.catid,
+    //           item.name,
+    //           item.categorycount,
+    //           item.allcount
+              
+
+    //       );
+    //     });
+       
+    //   });
+
     //this._renderer2.appendChild(this._document.body, this.jsonLD);
     // let param = this.router.parseUrl(this.router.url);
     // console.log(param.queryParams.blogid)
@@ -84,10 +128,13 @@ export class BlogComponent implements OnInit {
    // console.log(this.meta_keywords);
 
    // related category
-   this.route.queryParams.subscribe(params => {
+   
+
+   this.userSubscription =this.route.queryParams.subscribe(params => {
     let param = this.router.parseUrl(this.router.url);
     this.href = this.router.url;
     this.urlkeyworkd = this.href.substr(1);
+    //this.urlkeyworkd = this.route.snapshot.params.id;
    // console.log(this.href);
     //console.log(this.urlkeyworkd);
 
@@ -266,6 +313,9 @@ export class BlogComponent implements OnInit {
   ngAfterViewInit() {
     nuss:Number;
   }
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+}
 
   // getSafeHTML(value: {}) {
   //   // If value convert to JSON and escape / to prevent script tag in JSON
@@ -343,6 +393,110 @@ export class BlogComponent implements OnInit {
         });
    // do sth with the str e.g. console.log(this.strComment);
 
+    }
+
+
+    // Maincategory(catid) {
+    //   this.dataService.setcatid=catid;
+    //   this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+    //  //this.child.getblogcatfilter(catid);
+    // // this.router.navigateByUrl('/');
+    // this.router.navigateByUrl("/")
+    // .then(() => {
+    //   this.router.navigated = false;
+    //   this.router.navigate(["/"]);
+    // });
+    //       return ;
+    // }
+    
+    //google sign in 
+    public socialSignIn(socialPlatform : string) {
+    
+      //this.dataService.setToken(this.userid.toString());
+      //window.location.href = window.location.href;
+      
+      let socialPlatformProvider;
+      if(socialPlatform == "facebook"){
+        socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+      }else if(socialPlatform == "google"){
+        socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+      } 
+      
+      this.socialAuthService.signIn(socialPlatformProvider).then(
+        (userData) => {
+          let modal = new BlogUser();
+          modal.userid=0;
+          modal.fullname=userData.name;
+          modal.email=userData.email;
+          modal.pwd="";
+          modal.mobile="";
+          modal.roleid=2;
+          modal.img=userData.image;
+    
+          // let modal = new BlogUser();
+          // modal.userid=0;
+          // modal.fullname="MaharajanP";
+          // modal.email="maharajan.airtel@gmail.com";
+          // modal.pwd="";
+          // modal.mobile="";
+          // modal.roleid=2;
+          // modal.img="https://lh5.googleusercontent.com/-r12RCAOJIM8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcwcACGgbknpQ_i1S26iavnOhpiCg/s96-c/photo.jpg";
+         // this.dataService.setToken(userData.token);
+    
+          console.log(modal);
+          
+        //   this.dataService.saveBlogUser(modal)
+        //   .subscribe((response: BlogUser) => {
+          
+        //    console.log(response);
+        //    //console.log(response.userid);
+           
+        //     console.log(response.userid);
+        //     this.dataService.setToken(JSON.stringify(response.userid));
+        //    // window.location.href = window.location.href;
+        //   }
+        //  // , error => console.error(error)
+        //   );
+    
+    
+        //   this.dataService.saveBlogUser(modal)
+        //   .subscribe((response: BlogUser) => {
+          
+        //    console.log(response);
+        //    //console.log(response.userid);
+           
+        //     console.log(response.userid);
+        //     this.dataService.setToken(JSON.stringify(response.userid));
+        //    // window.location.href = window.location.href;
+        //   }
+        //  // , error => console.error(error)
+        //   );
+    
+          this.dataService.saveBlogUser(modal).subscribe(response =>
+            {
+               response.map(item =>
+              {
+                this.userid=item.userid;
+                console.log(this.userid);
+                this.dataService.setToken(this.userid.toString());
+        window.location.href = window.location.href;
+      
+               
+              });
+             
+            });
+    
+         
+          
+              
+        }
+      );
+     
+    }
+    logout()
+    {
+      this.dataService.deleteToken();
+      window.location.href = window.location.href;
     }
 
 

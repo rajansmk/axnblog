@@ -10,6 +10,9 @@ import { PagerServiceService } from 'src/app/pager-service.service';
 import { Autocomplete } from 'src/app/classall/autocomplete';
 import { DOCUMENT } from '@angular/common';
 import * as $ from 'jquery';
+import {AuthService,FacebookLoginProvider,GoogleLoginProvider} from 'angular-6-social-login';
+import { BlogUser } from 'src/app/classall/blog-user';
+import { Category } from 'src/app/classall/category';
 
 
 
@@ -19,6 +22,12 @@ import * as $ from 'jquery';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit  {
+  allcount:string;
+  bloguser:BlogUser [];
+  userid:number;
+  loginbtn:boolean;
+  logoutbtn:boolean;
+  Category =new Array<Category>();
 
   meta_keywords:string;
    keyword:string[];
@@ -43,7 +52,7 @@ export class HomeComponent implements OnInit  {
  // paged items
    // pagedItems: any[];
 
-  constructor(private _renderer2: Renderer2 ,@Inject(DOCUMENT) private _document: Document,private dataService: DataserviceService,private pagerService: PagerServiceService,private metservice:MetaserviceService,private router:Router) { 
+  constructor(private socialAuthService: AuthService,private _renderer2: Renderer2 ,@Inject(DOCUMENT) private _document: Document,private dataService: DataserviceService,private pagerService: PagerServiceService,private metservice:MetaserviceService,private router:Router) { 
     // title.setTitle('Angular 8,asp.net core tutorial');
     if(this.pagerService.getpageno)
     {
@@ -195,6 +204,19 @@ export class HomeComponent implements OnInit  {
      
     this.metservice.tagCreation('Angular 8,asp.net core tutorial','Tutorial of asp.net core and angular tutorial',
     'angular tutorial,angular 8,asp.net core tutorial,asp.net mvc','')
+
+      if(this.dataService.isLoggedIn())
+    {
+      console.log("loggedin");
+      this.loginbtn=false;
+      this.logoutbtn=true
+    }
+    else{
+     this.loginbtn=true;
+     this.logoutbtn=false
+    }
+
+   
   }
 //paging
 // onChangePage(pageOfItems: Array<any>,currentpage) {
@@ -263,6 +285,96 @@ getUserIdsFirstWay($event) {
   this.router.navigateByUrl('/');
 }
 
+
+//google sign in 
+public socialSignIn(socialPlatform : string) {
+
+  //this.dataService.setToken(this.userid.toString());
+  //window.location.href = window.location.href;
+  
+  let socialPlatformProvider;
+  if(socialPlatform == "facebook"){
+    socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+  }else if(socialPlatform == "google"){
+    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+  } 
+  
+  this.socialAuthService.signIn(socialPlatformProvider).then(
+    (userData) => {
+      let modal = new BlogUser();
+      modal.userid=0;
+      modal.fullname=userData.name;
+      modal.email=userData.email;
+      modal.pwd="";
+      modal.mobile="";
+      modal.roleid=2;
+      modal.img=userData.image;
+
+      // let modal = new BlogUser();
+      // modal.userid=0;
+      // modal.fullname="MaharajanP";
+      // modal.email="maharajan.airtel@gmail.com";
+      // modal.pwd="";
+      // modal.mobile="";
+      // modal.roleid=2;
+      // modal.img="https://lh5.googleusercontent.com/-r12RCAOJIM8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcwcACGgbknpQ_i1S26iavnOhpiCg/s96-c/photo.jpg";
+     // this.dataService.setToken(userData.token);
+
+      console.log(modal);
+      
+    //   this.dataService.saveBlogUser(modal)
+    //   .subscribe((response: BlogUser) => {
+      
+    //    console.log(response);
+    //    //console.log(response.userid);
+       
+    //     console.log(response.userid);
+    //     this.dataService.setToken(JSON.stringify(response.userid));
+    //    // window.location.href = window.location.href;
+    //   }
+    //  // , error => console.error(error)
+    //   );
+
+
+    //   this.dataService.saveBlogUser(modal)
+    //   .subscribe((response: BlogUser) => {
+      
+    //    console.log(response);
+    //    //console.log(response.userid);
+       
+    //     console.log(response.userid);
+    //     this.dataService.setToken(JSON.stringify(response.userid));
+    //    // window.location.href = window.location.href;
+    //   }
+    //  // , error => console.error(error)
+    //   );
+
+      this.dataService.saveBlogUser(modal).subscribe(response =>
+        {
+           response.map(item =>
+          {
+            this.userid=item.userid;
+            console.log(this.userid);
+            this.dataService.setToken(this.userid.toString());
+    window.location.href = window.location.href;
+  
+           
+          });
+         
+        });
+
+     
+      
+          
+    }
+  );
+ 
+}
+logout()
+{
+  this.dataService.deleteToken();
+  window.location.href = window.location.href;
+}
 // searchFromArray(arr, regex) {
 //   let matches = [], i;
 //   for (i = 0; i < arr.length; i++) {

@@ -29,142 +29,14 @@ export class AppComponent {
   }
   ngOnInit() {
 
-    if(this.dataService.isLoggedIn())
-    {
-      console.log("loggedin");
-      this.loginbtn=false;
-      this.logoutbtn=true
-    }
-    else{
-     this.loginbtn=true;
-     this.logoutbtn=false
-    }
-
-    this.dataService.get_category().subscribe(response =>
-      {
-        this.Category = response.map(item =>
-        {
-          this.allcount=item.allcount;
-
-          return new Category(
-            item.catid,
-              item.name,
-              item.categorycount,
-              item.allcount
-              
-
-          );
-        });
-       
-      });
+  
       
 
   
   }
   
 
-    Maincategory(catid) {
-      this.dataService.setcatid=catid;
-      this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
-     //this.child.getblogcatfilter(catid);
-    // this.router.navigateByUrl('/');
-    this.router.navigateByUrl("/")
-    .then(() => {
-      this.router.navigated = false;
-      this.router.navigate(["/"]);
-    });
-          return ;
-    }
-
-    //google sign in 
-    public socialSignIn(socialPlatform : string) {
-
-      //this.dataService.setToken(this.userid.toString());
-      //window.location.href = window.location.href;
-      
-      let socialPlatformProvider;
-      if(socialPlatform == "facebook"){
-        socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-      }else if(socialPlatform == "google"){
-        socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-      } 
-      
-      this.socialAuthService.signIn(socialPlatformProvider).then(
-        (userData) => {
-          let modal = new BlogUser();
-          modal.userid=0;
-          modal.fullname=userData.name;
-          modal.email=userData.email;
-          modal.pwd="";
-          modal.mobile="";
-          modal.roleid=2;
-          modal.img=userData.image;
-
-          // let modal = new BlogUser();
-          // modal.userid=0;
-          // modal.fullname="MaharajanP";
-          // modal.email="maharajan.airtel@gmail.com";
-          // modal.pwd="";
-          // modal.mobile="";
-          // modal.roleid=2;
-          // modal.img="https://lh5.googleusercontent.com/-r12RCAOJIM8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcwcACGgbknpQ_i1S26iavnOhpiCg/s96-c/photo.jpg";
-         // this.dataService.setToken(userData.token);
-
-          console.log(modal);
-          
-        //   this.dataService.saveBlogUser(modal)
-        //   .subscribe((response: BlogUser) => {
-          
-        //    console.log(response);
-        //    //console.log(response.userid);
-           
-        //     console.log(response.userid);
-        //     this.dataService.setToken(JSON.stringify(response.userid));
-        //    // window.location.href = window.location.href;
-        //   }
-        //  // , error => console.error(error)
-        //   );
-
-
-        //   this.dataService.saveBlogUser(modal)
-        //   .subscribe((response: BlogUser) => {
-          
-        //    console.log(response);
-        //    //console.log(response.userid);
-           
-        //     console.log(response.userid);
-        //     this.dataService.setToken(JSON.stringify(response.userid));
-        //    // window.location.href = window.location.href;
-        //   }
-        //  // , error => console.error(error)
-        //   );
-
-          this.dataService.saveBlogUser(modal).subscribe(response =>
-            {
-               response.map(item =>
-              {
-                this.userid=item.userid;
-                console.log(this.userid);
-                this.dataService.setToken(this.userid.toString());
-        window.location.href = window.location.href;
-      
-               
-              });
-             
-            });
-
-         
-          
-              
-        }
-      );
-     
-    }
-    logout()
-    {
-      this.dataService.deleteToken();
-      window.location.href = window.location.href;
-    }
+   
     //sample data
 //     email: "maharajan.airtel@gmail.com"
 // id: "114015666728879194169"

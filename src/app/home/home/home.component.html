@@ -1,4 +1,14 @@
- <!--- \\\\\\\Post-->
+
+	<div class="container-fluid gedf-wrapper  ">
+			<div class="row ">	 
+			<div class="col-md-3 order-sm-1 order-2 ">
+					<router-outlet></router-outlet>
+				 </div>
+			 
+	
+		   
+		
+		  <div class="col-md-7 col-sm-12 order-1 gedf-main">
  <div class="card gedf-card ">
 		
 			  
@@ -67,4 +77,22 @@
             </ul>
 		
 		</div>
+
+	</div>
+	<div class="col-md-2 order-3 order-md-2"  >
+	  
+	 <div class="card gedf-card" >
+		  <div class="card-body">
+			  <!-- <button type="button"  class="btn btn-danger btn-lg btn-block">Google Login</button>
+			  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+			  <button (click)="socialSignIn('facebook')">Sign in with Facebook</button> -->
+			  <button type="button" *ngIf="loginbtn" class="btn btn-danger btn-block" (click)="socialSignIn('google')"><i class="fa fa-google"></i> Sign in with Google</button>
+			  <button type="button" *ngIf="loginbtn" class="btn btn-primary btn-block" (click)="socialSignIn('facebook')"><i class="fa fa-facebook"></i> Sign in with Facebook</button>
+			  <button type="button" *ngIf="logoutbtn" class="btn btn-danger btn-block" (click)="logout()">logout</button>
+		  </div>
+		</div> 
+	</div>
 	  <!-- Post /////-->
+
+	</div>
+</div>
