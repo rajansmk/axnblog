@@ -8,6 +8,7 @@ import { TutorialsidebarComponent } from './tutorialsidebar/tutorialsidebar.comp
 
 const routes: Routes = [
   {path:'userpost',component:UserpostComponent},
+  {path:'admin-login',redirectTo:"http://localhost:4200/admin-login/login.php", pathMatch: 'full'},
   {path:'',component:HomeComponent,
   children: [
     {

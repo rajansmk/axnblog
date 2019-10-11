@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, ElementRef, ViewChild, ContentChild } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog';
@@ -18,6 +18,7 @@ import {AuthService,FacebookLoginProvider,GoogleLoginProvider} from 'angular-6-s
 import { BlogUser } from '../classall/blog-user';
 import { Category } from '../classall/category';
 import { Subscription } from 'rxjs';
+import { TutorialsidebarComponent } from '../tutorialsidebar/tutorialsidebar.component';
 
 
 
@@ -25,9 +26,11 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  styleUrls: ['./blog.component.css'],
+  providers: [TutorialsidebarComponent]
 })
 export class BlogComponent implements OnInit {
+  @ContentChild(TutorialsidebarComponent,{static: false} ) child: TutorialsidebarComponent ;
   // allcount:string;
   bloguser:BlogUser[];
   userid:number;
@@ -137,7 +140,7 @@ export class BlogComponent implements OnInit {
     //this.urlkeyworkd = this.route.snapshot.params.id;
    // console.log(this.href);
     //console.log(this.urlkeyworkd);
-
+    this.dataService.setUrlpath=this.urlkeyworkd;
      // this.blogid = this.route.snapshot.params.blogid;
      // this.header = this.route.snapshot.params.header;
      this.blogid = this.dataService.gettingblogid;
@@ -283,7 +286,9 @@ export class BlogComponent implements OnInit {
              item.created_date,
              item.catid,
              item.groupid,
-             item.meta_keywords
+             item.meta_keywords,
+             item.displayheader,
+             item.posttypeid
              
 
          );
@@ -291,8 +296,9 @@ export class BlogComponent implements OnInit {
          
 
        });
-
+       this.dataService.setcatid=this.relatedcategoryid
        this.categorybind(this.relatedcategoryid);
+      // this.child.category(this.relatedcategoryid)
 
      });
 
@@ -354,7 +360,9 @@ export class BlogComponent implements OnInit {
               item.created_date,
               item.name,
               item.meta_keywords,
-              item.catid
+              item.catid,
+              item.displayheader,
+             item.posttypeid
               
   
           );

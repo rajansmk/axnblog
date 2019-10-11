@@ -1,5 +1,5 @@
 <!-- <div class="col-md-3 order-sm-1 order-2 "> -->
-<div id="treeview10" class="treeview">
+<!-- <div id="treeview10" class="treeview">
     <ul class="list-group fixed-posi"  >
         <li class="list-group-item node-treeview10" data-nodeid="0" style="color:undefined;background-color:undefined;">
             <span class="icon expand-icon glyphicon glyphicon-plus"></span><span class="icon node-icon"></span><a
@@ -17,5 +17,14 @@
             <span class="icon glyphicon"></span><span class="icon node-icon"></span><a href="#parent5"
                 style="color:inherit;">Parent 5</a></li>
     </ul>
-</div>
+</div> -->
 <!-- </div>  -->
+
+<div class="bg-light border-right" id="sidebar-wrapper">
+		
+		<div class="list-group list-group-flush">
+		 
+		  <a  routerLinkActive="active" *ngFor="let cat of blogscategory"  [routerLink]="'/' + cat.blog_keywords"  class="list-group-item list-group-item-action bg-light handcursor"  >{{cat.blog_header}}</a>
+		  
+		</div>
+	  </div>

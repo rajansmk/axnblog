@@ -6,8 +6,8 @@
 }
 .navbar-brand {
   
-  font-size: 2.25rem;
-  font-weight: 800;
+  font-size: 2.0rem;
+  font-weight: 600;
 }
 .navback{
   background-color: #a5ceb1;
@@ -24,6 +24,10 @@
 .bloglink{
   cursor: pointer;
   color: #296f3d  !important;
+}
+.navbar {
+  
+  padding: 0rem 0rem !important;
 }
 
 

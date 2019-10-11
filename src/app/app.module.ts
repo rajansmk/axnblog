@@ -18,6 +18,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
+
 import {
   SocialLoginModule,
   AuthServiceConfig,
@@ -27,6 +28,7 @@ import {
 import { UserpostComponent } from './userpost/userpost.component';
 import { TutorialsidebarComponent } from './tutorialsidebar/tutorialsidebar.component';
 import { MainsidebarComponent } from './mainsidebar/mainsidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -62,6 +64,7 @@ export function getAuthServiceConfigs() {
     
     
     
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -72,7 +75,8 @@ export function getAuthServiceConfigs() {
     CKEditorModule,
     ShareButtonsModule.withConfig({
       debug: true
-    })
+    }),
+    BrowserAnimationsModule
     
    
     

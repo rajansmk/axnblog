@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, ElementRef } from '@angular/core';
 import { Category } from '../classall/category';
 import { DataserviceService } from '../dataservice.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-mainsidebar',
   templateUrl: './mainsidebar.component.html',
   styleUrls: ['./mainsidebar.component.css']
 })
+@Injectable()
 export class MainsidebarComponent implements OnInit {
   allcount:string;
   
@@ -16,7 +18,7 @@ export class MainsidebarComponent implements OnInit {
   logoutbtn:boolean;
   Category =new Array<Category>();
   constructor(private dataService: DataserviceService,private router:Router) { }
-
+  @ViewChild('sidenave',{static:false}) sidenave: ElementRef;
   ngOnInit() {
 
     this.dataService.get_category().subscribe(response =>
@@ -49,5 +51,7 @@ export class MainsidebarComponent implements OnInit {
   });
         return ;
   }
+  
+  
 
 }

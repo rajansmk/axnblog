@@ -64,6 +64,12 @@ cursor: pointer;
 cursor: pointer;
 color: #296f3d  !important;
 }
+.badge {
+  
+  font-size: 100% !important;
+  font-weight: 500 !important;
+  
+}
 
 
 

@@ -1,19 +1,65 @@
 <!-- <div class="col-md-3 order-sm-1 order-2 "> -->
-<div class="card gedf-card" data-spy="affix" data-offset-top="10" >
-				  <div class="card-body">
-					<h5 class="card-title">Tutorial Category</h5>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item d-flex justify-content-between align-items-center handcursor"  (click)="Maincategory(0)" >
-							All Category
-							<span class="badge badge-primary badge-pill">{{allcount}}</span>
-						  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-center handcursor" *ngFor="let cat of Category" (click)="Maincategory(cat.catid)" >
-						{{cat.name}}
-						<span class="badge badge-primary badge-pill">{{cat.categorycount}}</span>
-					  </li>
-					 
-					</ul>
+
+	 
+	<!-- <mat-sidenav-container>
+				<mat-sidenav #sidenav mode="side" opened>
+				  <mat-nav-list>
+					
+					<a mat-list-item (click)="Maincategory(0)"> All Category  <span class="badge badge-primary badge-pill"> {{allcount}}</span> </a>
+					<a mat-list-item  *ngFor="let cat of Category" (click)="Maincategory(cat.catid)"> {{cat.name}}  <span class="badge badge-primary badge-pill"> {{cat.categorycount}}</span> </a>
+					
+			  
+				  </mat-nav-list>
+				</mat-sidenav>
+				<mat-sidenav-content>
+				  <div style="height: 88vh;">
+			  
+					<router-outlet></router-outlet>
 				  </div>
-				</div>
+				</mat-sidenav-content>
+			  </mat-sidenav-container> -->
+			 
+			   <!-- Sidebar -->
+    <div class="bg-light border-right sticky-top" id="sidebar-wrapper">
+		
+		<div class="list-group list-group-flush">
+		  <a routerLinkActive class="list-group-item list-group-item-action bg-light handcursor" (click)="Maincategory(0)"> All Category <span class="badge badge-primary badge-pill float-right ">{{allcount}}</span></a>
+		  <a  routerLinkActive class="list-group-item list-group-item-action bg-light handcursor" *ngFor="let cat of Category" (click)="Maincategory(cat.catid)" >{{cat.name}} <span class="badge badge-primary badge-pill float-right">{{cat.categorycount}}</span></a>
+		  
+		</div>
+	  </div>
+	  <!-- /#sidebar-wrapper -->
+
+				  <!-- <div class="card gedf-card" data-spy="affix" data-offset-top="10" >
+						<div class="card-body">
+						  <h5 class="card-title">Tutorial Category</h5>
+						  <ul class="list-group list-group-flush">
+							  <li class="list-group-item d-flex justify-content-between align-items-center handcursor"  (click)="Maincategory(0)" >
+								  All Category
+								  <span class="badge badge-primary badge-pill">{{allcount}}</span>
+								</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center handcursor" *ngFor="let cat of Category" (click)="Maincategory(cat.catid)" >
+							  {{cat.name}}
+							  <span class="badge badge-primary badge-pill">{{cat.categorycount}}</span>
+							</li>
+						   
+						  </ul>
+					
+ </div>
+</div> -->
+				 
+
 			<!-- </div> -->
+			<script>
+					$( document ).ready(function() {
+					  $("#menu-toggle").click(function(e) {
+				alert("helloooo");
+				e.preventDefault();
+				
+				$("#wrapper").toggleClass("toggled");
+				});
+				});
+				
+					 
+					</script>
 		

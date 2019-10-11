@@ -7,14 +7,15 @@ import { BlogUser } from './classall/blog-user';
 import {AuthService,FacebookLoginProvider,GoogleLoginProvider} from 'angular-6-social-login';
 import { min } from 'rxjs/operators';
 import { observable } from 'rxjs';
-
+import { MainsidebarComponent } from './mainsidebar/mainsidebar.component';
+import * as $ from 'jquery';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[HomeComponent]
+  providers:[MainsidebarComponent]
 })
 export class AppComponent {
   allcount:string;
@@ -22,11 +23,13 @@ export class AppComponent {
   userid:number;
   loginbtn:boolean;
   logoutbtn:boolean;
-  @ContentChild(HomeComponent,{static: false}) private child: HomeComponent  ;
-
+  rightSideNav : boolean ;
+  // @ContentChild(MainsidebarComponent,{static: false}) private child: MainsidebarComponent  ;
+  
   Category =new Array<Category>();
-  constructor(private socialAuthService: AuthService,private dataService: DataserviceService,private router:Router ) { 
+  constructor( private socialAuthService: AuthService,private dataService: DataserviceService,private router:Router ) { 
   }
+ 
   ngOnInit() {
 
   
@@ -35,7 +38,8 @@ export class AppComponent {
   
   }
   
-
+  
+ 
    
     //sample data
 //     email: "maharajan.airtel@gmail.com"

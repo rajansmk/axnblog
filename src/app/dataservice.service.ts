@@ -10,6 +10,8 @@ import { Comments } from './classall/comments';
 import { map } from 'rxjs/operators';
 import { Savecomments } from './classall/savecomment';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +24,7 @@ export class DataserviceService {
   _blogheader:string;
   _blogheaderdesc:string;
   _catid: number;
+  _urlpath:string;
 
   constructor(private httpClient : HttpClient) { }
 
@@ -33,6 +36,12 @@ public getBlog(catid): Observable<Bloghome[]>
    // const url = 'http://localhost/uat/api/getdata.php';
  
     return this.httpClient.get<Bloghome[]>(this.baseUrl + '/api/getdata.php?'+ 'catid=' + catid);
+  }
+  public getBlogthruUrl(url): Observable<Bloghome[]>
+  {
+   // const url = 'http://localhost/uat/api/getdata.php';
+ 
+    return this.httpClient.get<Bloghome[]>(this.baseUrl + '/api/getdatathruurl.php?'+ 'url=' + url);
   }
   public getBlogId(blogid: number,urlkeyword :string): Observable<Blog[]>
   {
@@ -92,6 +101,14 @@ get gettingheaderdesc(): string {
  }
  get getcatid(): number {
   return this._catid;
+}
+
+ //catid maintain
+ set setUrlpath(value: string) {
+  this._urlpath = value;
+}
+get getUrlpath(): string {
+return this._urlpath;
 }
   //end
   //google authentication

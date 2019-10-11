@@ -193,7 +193,9 @@ export class HomeComponent implements OnInit  {
               item.created_date,
               item.name,
               item.meta_keywords,
-              item.catid
+              item.catid,
+              item.displayheader,
+             item.posttypeid
               
 
           );
