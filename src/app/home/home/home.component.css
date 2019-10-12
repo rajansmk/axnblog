@@ -59,6 +59,16 @@
   cursor: pointer;
   color: #296f3d  !important;
 }
+.mttop{
+  margin-top:5px;
+}
+.card {
+  border: 0px solid rgba(255, 255, 255, 0.125) !important;
+}
+.btn{
+  padding: .275rem .75rem !important;
+    font-size: 0.8rem !important;
+}
 
 
 

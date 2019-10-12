@@ -1,5 +1,5 @@
 
-<div class="container-fluid gedf-wrapper  ">
+<div class="container-fluid gedf-wrapper mttop  ">
     <div class="row ">
     
          <div class="col-md-3 order-sm-1 order-2 ">
@@ -9,13 +9,20 @@
 
        
      
-      <div class="col-md-7 col-sm-12 order-1 gedf-main">
+      <div class="col-md-7 col-sm-12 order-1 gedf-main ">
 
 <div class="card gedf-card">
   <!-- <div [innerHTML]="jsonLD"></div> -->
     <div class="card-body" *ngFor="let blog of blogs">
-        <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Back </a>
-      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ blog.created_date | date}}</div>
+        
+        <div class="clearfix">
+            <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-left">Prev</button>
+            <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-right">Next</button>
+          </div>
+          <div class="text-muted h7 mb-2 mt-2"> <i class="fa fa-clock-o"></i> {{ blog.created_date | date}}</div>
+        <!-- <a class="btn btn-primary navback float-left" href="javascript:void(0)" (click)="cancel(pageno)" >Pre </a>
+        <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Next </a> -->
+      
       <!-- <a class="card-link"  >
           
         <h5 class="card-title"> {{blog.blog_header}}</h5>
@@ -30,16 +37,19 @@
           
         <!-- {{blog.blog_desc | safehtml}} -->
       </div>
-      <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Back </a>
+      <!-- <a class="btn btn-primary navback float-right" href="javascript:void(0)" (click)="cancel(pageno)" >Back </a> -->
       <div >
-        <span *ngFor="let keywords of keyword" class="badge badge-primary navback ml-2">{{keywords}}</span>
+        <span *ngFor="let keywords of keyword" class="badge badge-danger navback ml-2">{{keywords}}</span>
         <!-- <span class="badge badge-primary navback">Android</span>
         <span class="badge badge-primary navback">PHP</span>
         <span class="badge badge-primary navback">Node.js</span>
         <span class="badge badge-primary navback">Ruby</span>
         <span class="badge badge-primary navback">Paython</span> -->
       </div>
-     
+      <div class="clearfix mt-2">
+          <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-left">Prev</button>
+          <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-right">Next</button>
+        </div>
 
     </div>
     <!-- comment -->
@@ -48,15 +58,15 @@
         <section class="post-heading">
           <div class="row">
               <div class="col-md-11">
-                  <div class="media">
+                  <div class="media clearfix">
                     <div class="media-left">
                       <a href="#">
-                        <img class="media-object photo-profile" src="{{comments.img}}" width="40" height="40" alt="...">
+                        <img class="media-object photo-profile" src="{{comments.img}}" width="30" height="30" alt="...">
                       </a>
                     </div>
                     <div class="media-body" style="margin-left: 10px">
-                      <h5 class="media-heading">{{comments.fullname}}</h5>
-                      <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{comments.created_date | date}}</div>
+                      <h5 class="media-heading commentfont">{{comments.fullname}}</h5>
+                      <div class="text-muted h7 commentfont "> <i class="fa fa-clock-o"></i>{{comments.created_date | date}}</div>
                     </div>
                   </div>
               </div>
@@ -116,9 +126,9 @@
     </div>
 
   </div>
-  <div class="col-md-2 order-3 order-md-2"  >
+  <div class="col-md-2 order-3 order-md-2 "  >
     
-   <div class="card gedf-card" >
+   <div class="card gedf-card sticky-top sticky-offset" >
         <div class="card-body">
             <!-- <button type="button"  class="btn btn-danger btn-lg btn-block">Google Login</button>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>

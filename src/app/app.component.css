@@ -29,6 +29,8 @@
   
   padding: 0rem 0rem !important;
 }
-
+.sticky-offset {
+  top: 56px;
+}
 
 

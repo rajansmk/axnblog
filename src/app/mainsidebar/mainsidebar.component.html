@@ -22,7 +22,7 @@
 			   <!-- Sidebar -->
     <div class="bg-light border-right sticky-top" id="sidebar-wrapper">
 		
-		<div class="list-group list-group-flush">
+		<div class="list-group list-group-flush sticky-top sticky-offset">
 		  <a routerLinkActive class="list-group-item list-group-item-action bg-light handcursor" (click)="Maincategory(0)"> All Category <span class="badge badge-primary badge-pill float-right ">{{allcount}}</span></a>
 		  <a  routerLinkActive class="list-group-item list-group-item-action bg-light handcursor" *ngFor="let cat of Category" (click)="Maincategory(cat.catid)" >{{cat.name}} <span class="badge badge-primary badge-pill float-right">{{cat.categorycount}}</span></a>
 		  

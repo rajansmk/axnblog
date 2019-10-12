@@ -4,3 +4,6 @@
     background-color: #dae0e5!important;
     border-color: #3d8a47 !important;
 }
+.sticky-offset {
+    top: 10px;
+  }

@@ -20,9 +20,9 @@
 </div> -->
 <!-- </div>  -->
 
-<div class="bg-light border-right" id="sidebar-wrapper">
+<div class="bg-light border-right sticky-top" id="sidebar-wrapper">
 		
-		<div class="list-group list-group-flush">
+		<div class="list-group sticky-top sticky-offset list-group-flush">
 		 
 		  <a  routerLinkActive="active" *ngFor="let cat of blogscategory"  [routerLink]="'/' + cat.blog_keywords"  class="list-group-item list-group-item-action bg-light handcursor"  >{{cat.blog_header}}</a>
 		  

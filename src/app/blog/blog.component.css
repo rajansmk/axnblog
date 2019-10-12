@@ -52,9 +52,12 @@ font-weight: 800;
 background-color: #a5ceb1;
 border-color: none;
 }
-.badge-primary {
-color: #fff;
-background-color: #91d0a3 !important;
+/* .badge-primary {
+color: rgb(255, 255, 255);
+background-color: #d32222 !important;
+} */
+.commentfont{
+  font-size: 0.9rem !important;
 }
 .handcursor{
 cursor: pointer;
@@ -64,11 +67,29 @@ cursor: pointer;
 cursor: pointer;
 color: #296f3d  !important;
 }
+
+@media (min-width: 768px) {
+  .badge {
+  
+    font-size: 100% !important;
+    font-weight: 400 !important;
+    
+  }
+}
 .badge {
   
-  font-size: 100% !important;
   font-weight: 500 !important;
   
+}
+.mttop{
+  margin-top:5px;
+}
+.btn{
+  padding: .275rem .75rem !important;
+    font-size: 0.8rem !important;
+}
+.card {
+  border: 0px solid rgba(255, 255, 255, 0.125) !important;
 }
 
 
