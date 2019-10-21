@@ -2,22 +2,29 @@
 <div class="container-fluid gedf-wrapper mttop  ">
     <div class="row ">
     
-         <div class="col-md-3 order-sm-1 order-2 ">
+         <div class="col-md-2 order-sm-1 order-2 ">
             <router-outlet></router-outlet>
          </div>
         
 
        
      
-      <div class="col-md-7 col-sm-12 order-1 gedf-main ">
+      <div class="col-md-8 col-sm-12 order-1 gedf-main ">
 
 <div class="card gedf-card">
   <!-- <div [innerHTML]="jsonLD"></div> -->
     <div class="card-body" *ngFor="let blog of blogs">
         
         <div class="clearfix">
-            <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-left">Prev</button>
-            <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-right">Next</button>
+            <a *ngIf="blog.nexturl!='pre'; else previous"  [routerLink]="'/' + blog.nexturl"  class="btn btn-secondary navback float-left">Prev</a>
+            <ng-template #previous>
+                <a  [routerLink]="'/'"  class="btn btn-secondary navback float-left">Home</a>
+            </ng-template>
+
+          <a *ngIf="blog.preurl!='next'; else next"  [routerLink]="'/' + blog.preurl"  class="btn btn-secondary navback float-right">Next</a>
+          <ng-template #next>
+              <a  [routerLink]="'/'"  class="btn btn-secondary navback float-right">Home</a>
+          </ng-template>
           </div>
           <div class="text-muted h7 mb-2 mt-2"> <i class="fa fa-clock-o"></i> {{ blog.created_date | date}}</div>
         <!-- <a class="btn btn-primary navback float-left" href="javascript:void(0)" (click)="cancel(pageno)" >Pre </a>
@@ -47,13 +54,21 @@
         <span class="badge badge-primary navback">Paython</span> -->
       </div>
       <div class="clearfix mt-2">
-          <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-left">Prev</button>
-          <button type="button" (click)="cancel(pageno)" class="btn btn-secondary navback float-right">Next</button>
+          <a *ngIf="blog.nexturl!='pre'; else previous"  [routerLink]="'/' + blog.nexturl"  class="btn btn-secondary navback float-left">Prev</a>
+          <ng-template #previous>
+              <a  [routerLink]="'/'"  class="btn btn-secondary navback float-left">Home</a>
+          </ng-template>
+
+        <a *ngIf="blog.preurl!='next'; else next"  [routerLink]="'/' + blog.preurl"  class="btn btn-secondary navback float-right">Next</a>
+        <ng-template #next>
+            <a  [routerLink]="'/'"  class="btn btn-secondary navback float-right">Home</a>
+        </ng-template>
         </div>
 
     </div>
     <!-- comment -->
-    <div class="card-body" >
+    <div class="card-body commentsec" >
+      <h4 class="text-center">Comments and Share</h4>
         <div *ngFor="let comments of comment">
         <section class="post-heading">
           <div class="row">
@@ -136,6 +151,13 @@
             <button type="button" *ngIf="loginbtn" class="btn btn-danger btn-block" (click)="socialSignIn('google')"><i class="fa fa-google"></i> Sign in with Google</button>
             <button type="button" *ngIf="loginbtn" class="btn btn-primary btn-block" (click)="socialSignIn('facebook')"><i class="fa fa-facebook"></i> Sign in with Facebook</button>
             <button type="button" *ngIf="logoutbtn" class="btn btn-danger btn-block" (click)="logout()">logout</button>
+              <br>
+            <ul class="tags">
+              <li><a routerLink="/angular-tutorial-introduction"  class="tag">Angular Tutorial</a></li>
+              <li><a routerLink="/asp.net-core-login-logout-registration-example" class="tag">Asp.net Core</a></li>
+              <li><a routerLink="/custom-autocomplete-textbox-in-angular-8-php-mysql-api" class="tag">Angular Blog</a></li>
+            </ul>
+            
         </div>
       </div> 
   </div>

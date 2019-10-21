@@ -27,10 +27,10 @@ import { TutorialsidebarComponent } from '../tutorialsidebar/tutorialsidebar.com
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
-  providers: [TutorialsidebarComponent]
+  
 })
 export class BlogComponent implements OnInit {
-  @ContentChild(TutorialsidebarComponent,{static: false} ) child: TutorialsidebarComponent ;
+ // @ContentChild(TutorialsidebarComponent,{static: false} ) child: TutorialsidebarComponent ;
   // allcount:string;
   bloguser:BlogUser[];
   userid:number;
@@ -288,7 +288,9 @@ export class BlogComponent implements OnInit {
              item.groupid,
              item.meta_keywords,
              item.displayheader,
-             item.posttypeid
+             item.posttypeid,
+             item.preurl,
+             item.nexturl
              
 
          );

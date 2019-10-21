@@ -11,8 +11,10 @@ export class Blog {
   public meta_keywords:string;
   public displayheader:string;
   public posttypeid:number
+  public preurl:string;
+  public nexturl:string;
  
-  constructor(blogid:number, blog_desc:string, blog_header: string,blog_headerdesc:string,blog_keywords:string,created_date:string,catid:number,groupid:number,meta_keywords:string,displayheader:string,posttypeid:number) {
+  constructor(blogid:number, blog_desc:string, blog_header: string,blog_headerdesc:string,blog_keywords:string,created_date:string,catid:number,groupid:number,meta_keywords:string,displayheader:string,posttypeid:number,preurl:string,nexturl:string) {
     this.blogid = blogid;
     this.blog_desc = blog_desc;
     this.blog_header = blog_header;
@@ -24,6 +26,8 @@ export class Blog {
     this.meta_keywords = meta_keywords;
     this.displayheader=displayheader;
     this.posttypeid=posttypeid;
+    this.preurl=preurl;
+    this.nexturl=nexturl;
   }
 }
 

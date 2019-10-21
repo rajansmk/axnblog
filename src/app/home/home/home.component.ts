@@ -250,13 +250,7 @@ setPage(page: number) {
 
 getUserIdsFirstWay($event) {
   let search = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
-  // this.userList1 = [];
-
-  // if (userId.length > 2) {
-  //   if ($event.timeStamp - this.lastkeydown1 > 200) {
-  //     this.userList1 = this.searchFromArray(this.userData, userId);
-  //   }
-  // }
+ 
   if (search.length > 2) {
   this.dataService.autoComplete(search).subscribe(response =>
     {

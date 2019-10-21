@@ -91,6 +91,11 @@ color: #296f3d  !important;
 .card {
   border: 0px solid rgba(255, 255, 255, 0.125) !important;
 }
+.commentsec
+{
+  padding: 5%;
+  border: 6px double #a5ceb1;
+}
 
 
 
