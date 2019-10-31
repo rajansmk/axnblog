@@ -105,6 +105,41 @@ blockquote i {
   box-shadow: none!important;
   background-color: #f1f1f1;
 }
+.explain {
+  min-height: 5em;
+  /* padding   : 1em 1em; */
+  font      : 1em/150% sans-serif;
+  position  : relative;
+  background-color: #ffffff;
+}
+
+.explain ul li:before {
+  content: '\2710';
+  margin-left: -20px;
+  margin-right: 10px;
+  font-size:1.2em;
+  
+  }
+  .explain ul li{
+    list-style-type: none !important;
+  }
+  .pl15{
+    padding-left: 15px;
+  }
+  .sidebarscroll{
+    max-height: 100vh;
+    overflow: auto;
+  }
+/* .imp::before{
+  content: '\2712';
+  
+  font-size : 2em;
+  
+  vertical-align: middle;
+  font-weight: 500;
+  color: #6b5;
+  
+} */
 .info{
   border-radius: 20px;
     padding: 15px;

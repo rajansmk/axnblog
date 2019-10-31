@@ -26,7 +26,8 @@
 	</span>
 
 		<div class="card-body" *ngFor="let blog of pagedItems">
-		  <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ blog.created_date | date}}</div>
+		  <!-- <div class="text-muted h7 mb-2">  {{ blog.created_date | date}}</div> -->
+		  <!-- <i class="fa fa-clock-o"></i> -->
 		  <!-- <a class="card-link" [routerLink]="['/blog', blog.name,blog.blogid, blog.blog_keywords]" > -->
 			<!-- <a class="card-link navback handcursor" (click)="Mainrouting(blog.blogid,blog.blog_keywords,blog.blog_header,blog.blog_headerdesc)" > -->
 					<a class="card-link navback handcursor" [routerLink]="'/' + blog.blog_keywords"  >

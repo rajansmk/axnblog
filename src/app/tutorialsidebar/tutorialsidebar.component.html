@@ -22,10 +22,10 @@
 
 <div class="bg-light border-right sticky-top" id="sidebar-wrapper">
 		
-		<div class="list-group sticky-top sticky-offset list-group-flush">
+		<div class="list-group sticky-top sticky-offset list-group-flush sidebarscroll">
 		 
           <a   routerLinkActive="active" *ngFor="let cat of blogscategory"  [routerLink]="'/' + cat.blog_keywords"  class="list-group-item list-group-item-action bg-light handcursor"  > 
-            <span *ngIf="cat.posttypeid!='1'; else posttype">{{cat.displayheader}}</span>
+            <span  *ngIf="cat.posttypeid!='1'; else posttype">{{cat.displayheader}}</span>
             <ng-template #posttype>
                     <span> {{cat.blog_header}}</span>
                 </ng-template>
