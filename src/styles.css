@@ -35,7 +35,31 @@ pre{
       }
   }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+body { margin: 0; font-family: arial,sans-serif;
+  font-size: 11pt; }
+  h1 span{
+    font-size: 29px !important;
+    color:teal !important;
+  }
+  h1{
+    font-size: 29px !important;
+    color:teal !important;
+  }
+  h2 span{
+    font-size: 19px !important;
+    color:teal !important;
+    
+  }
+  h2{
+    font-size: 19px !important;
+    color:teal !important;
+    
+  }
+  p span{
+    font-family: arial,sans-serif !important;
+  font-size: 11pt !important;
+  }
 
 .badge-primary {
   color: #fff;
@@ -130,6 +154,10 @@ blockquote i {
     max-height: 100vh;
     overflow: auto;
   }
+  .list-group-item {
+    
+    padding: .55rem 1.25rem !important;
+}
 /* .imp::before{
   content: '\2712';
   

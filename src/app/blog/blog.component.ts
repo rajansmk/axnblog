@@ -299,7 +299,7 @@ export class BlogComponent implements OnInit {
 
        });
        this.dataService.setcatid=this.relatedcategoryid
-       this.categorybind(this.relatedcategoryid);
+      // this.categorybind(this.relatedcategoryid);
       // this.child.category(this.relatedcategoryid)
 
      });

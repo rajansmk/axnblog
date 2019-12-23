@@ -29,6 +29,7 @@ import { UserpostComponent } from './userpost/userpost.component';
 import { TutorialsidebarComponent } from './tutorialsidebar/tutorialsidebar.component';
 import { MainsidebarComponent } from './mainsidebar/mainsidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GtagModule } from 'angular-gtag';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -73,6 +74,7 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     FormsModule,
     CKEditorModule,
+    GtagModule.forRoot({ trackingId: 'UA-YOUR_TRACKING_ID', trackPageviews: true }),
     ShareButtonsModule.withConfig({
       debug: true
     }),

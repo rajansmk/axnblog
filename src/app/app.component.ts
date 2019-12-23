@@ -1,7 +1,7 @@
 import { Component, ViewChild,ContentChild, AfterViewInit } from '@angular/core';
 import { DataserviceService } from './dataservice.service';
 import { Category } from './classall/category';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { BlogUser } from './classall/blog-user';
 import {AuthService,FacebookLoginProvider,GoogleLoginProvider} from 'angular-6-social-login';
@@ -9,6 +9,8 @@ import { min } from 'rxjs/operators';
 import { observable } from 'rxjs';
 import { MainsidebarComponent } from './mainsidebar/mainsidebar.component';
 import * as $ from 'jquery';
+import { GtagModule } from 'angular-gtag';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -27,12 +29,29 @@ export class AppComponent {
   // @ContentChild(MainsidebarComponent,{static: false}) private child: MainsidebarComponent  ;
   
   Category =new Array<Category>();
-  constructor( private socialAuthService: AuthService,private dataService: DataserviceService,private router:Router ) { 
+  constructor( private socialAuthService: AuthService,private dataService: DataserviceService,private router:Router,private titleService: Title ) {
+    
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     (<any>window).gtag('set', 'page', event.urlAfterRedirects);
+    //     (<any>window).gtag('send', 'pageview');
+    //     //alert(event.urlAfterRedirects);
+        
+    //   }
+    // }); 
+    
   }
  
   ngOnInit() {
 
-  
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        (<any>window).gtag('config', 'UA-97214960-4', {
+          'page_title' : this.titleService.getTitle(),
+          'page_path': event.urlAfterRedirects
+        });
+      }
+    });
       
 
   
