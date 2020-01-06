@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject, ElementRef, ViewChild, ContentChild } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, ElementRef, ViewChild, ContentChild,AfterViewInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog';
@@ -91,6 +91,9 @@ export class BlogComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    
+
 
     if(this.dataService.isLoggedIn())
     {
@@ -320,6 +323,13 @@ export class BlogComponent implements OnInit {
   }
   ngAfterViewInit() {
     nuss:Number;
+    setTimeout(()=>{
+      try{
+        (window['adsbygoogle'] = window['adsbygoogle'] || []).push({});
+      }catch(e){
+        console.error("error");
+      }
+    },50);
   }
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();

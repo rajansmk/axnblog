@@ -7,12 +7,15 @@ import { HomeComponent } from './home/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { BlogComponent } from './blog/blog.component';
+import { TopBannerComponent } from './classall/sidefirstbanner';
+import { TopSecondBannerComponent } from './classall/sidesecondbanner';
 import { SafehtmlPipe } from './safehtml.pipe';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { MyJsonLd } from './my-json-ld';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+//  import { AdsenseModule } from 'ng2-adsense';
 
 
 
@@ -54,6 +57,8 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     HomeComponent,
+    TopBannerComponent,
+    TopSecondBannerComponent,
     JwPaginationComponent,
     BlogComponent,
     SafehtmlPipe,
@@ -78,6 +83,10 @@ export function getAuthServiceConfigs() {
     ShareButtonsModule.withConfig({
       debug: true
     }),
+    // AdsenseModule.forRoot({
+    //   adClient: 'ca-pub-1641765551962000',
+    //   adSlot: 1789337972,
+    // }),
     BrowserAnimationsModule
     
    
